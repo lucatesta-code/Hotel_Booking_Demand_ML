@@ -3,4 +3,4 @@ streamlit==0.75.0
 matplotlib==3.3.4
 numpy==1.19.5
 scikit_learn==0.24.2
-python==3.7.7
+python==3.8
