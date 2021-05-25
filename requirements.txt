@@ -1,8 +1,5 @@
-import pandas as pd 
-import streamlit as st
-from sklearn.preprocessing import StandardScaler
-import pickle
-import numpy as np
-from matplotlib import pyplot as plt
-from sklearn.metrics import roc_curve
-from sklearn.metrics import accuracy_score
+pandas==1.1.5
+streamlit==0.75.0
+matplotlib==3.3.4
+numpy==1.19.5
+scikit_learn==0.24.2
