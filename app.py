@@ -3,9 +3,7 @@ import streamlit as st
 from sklearn.preprocessing import StandardScaler
 import pickle
 import numpy as np
-from matplotlib import pyplot as plt
-from sklearn.metrics import roc_curve
-from sklearn.metrics import accuracy_score
+from xgboost import XGBClassifier
 
 
 pickle_in = open('xgb.pkl', 'rb')
