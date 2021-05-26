@@ -22,15 +22,15 @@ st.sidebar.write("In tourism and travel related industries, most of the research
 
 
 #VARIABLES-----------------------------------------------------------------
-number_of_cancellation = st.number_input("Insert the number of previous cancellations:")
-adr = st.number_input("Insert the price (USD):")
-adults = st.number_input("Insert number of adults:")
-agent = st.number_input("Insert the ID of the travel agency:")
-arrival_date_week_number = st.number_input("Insert the week number:")
+number_of_cancellation = st.number_input("Insert the number of previous cancellations:", value = 0)
+adr = st.number_input("Insert the price (USD):", value = 0)
+adults = st.number_input("Insert number of adults:", value = 0)
+agent = st.number_input("Insert the ID of the travel agency:", value = 0)
+arrival_date_week_number = st.number_input("Insert the week number:", value = 0)
 assigned_room_type = st.selectbox("Insert the room type:", ['C', 'A', 'D', 'E', 'G', 'F', 'I', 'B', 'H', 'L', 'K'])
-babies = st.number_input("Insert number of babies (0 - 5):")
-booking_changes = st.number_input("Number of changes/amendments made to the booking from the moment the booking was entered on the PMS until the moment of check-in or cancellation:")
-children = st.number_input("Insert number of children (5 - 18):")
+babies = st.number_input("Insert number of babies (0 - 5):", value = 0)
+booking_changes = st.number_input("Number of changes/amendments made to the booking from the moment the booking was entered on the PMS until the moment of check-in or cancellation:", value = 0)
+children = st.number_input("Insert number of children (5 - 18):", value = 0)
 country = st.selectbox("Insert Country:", ['PRT', 'GBR', 'USA', 'ESP', 'IRL', 'FRA', 'ROU', 'NOR', 'OMN',
                                             'ARG', 'DEU', 'POL', 'BEL', 'BRA', 'ITA', 'CHE', 'CN', 'GRC',
                                             'NLD', 'DNK', 'RUS', 'SWE', 'AUS', 'EST', 'CZE', 'FIN', 'AUT',
@@ -51,18 +51,18 @@ country = st.selectbox("Insert Country:", ['PRT', 'GBR', 'USA', 'ESP', 'IRL', 'F
                                             'GUY', 'ATA', 'GHA', 'MWI', 'MNE', 'GLP', 'GTM', 'MDG', 'ASM',
                                             'TGO', 'NPL', 'MRT', 'BHS', 'UMI', 'NCL', 'FJI', 'KIR', 'SDN',
                                             'MYT', 'ATF', 'DJI', 'SLE', 'FRO', 'LAO'])
-days_in_waiting_list =  st.number_input("Number of days the booking was in the waiting list before it was confirmed to the customer:")
+days_in_waiting_list =  st.number_input("Number of days the booking was in the waiting list before it was confirmed to the customer:", value = 0)
 hotel = st.selectbox("Insert the hotel type:", ['Resort Hotel', 'City Hotel'])
-is_repeated_guest = st.number_input("Value indicating if the booking name was from a repeated guest (1) or not (0):")
-lead_time = st.number_input("Number of days that elapsed between the entering date of the booking into the PMS and the arrival date")
+is_repeated_guest = st.number_input("Value indicating if the booking name was from a repeated guest (1) or not (0):", value = 0)
+lead_time = st.number_input("Number of days that elapsed between the entering date of the booking into the PMS and the arrival date", value = 0)
 meal = st.selectbox("Insert the treatment type:", ['BB', 'FB', 'HB', 'SC', 'Undefined'])
-previous_bookings_not_canceled = st.number_input("Number of previous bookings not cancelled by the customer prior to the current booking:")
-previous_cancellations = st.number_input("Number of previous bookings that were cancelled by the customer prior to the current booking:")
-required_car_parking_spaces = st.number_input("Number of car parking spaces required by the customer:")
+previous_bookings_not_canceled = st.number_input("Number of previous bookings not cancelled by the customer prior to the current booking:", value = 0)
+previous_cancellations = st.number_input("Number of previous bookings that were cancelled by the customer prior to the current booking:", value = 0)
+required_car_parking_spaces = st.number_input("Number of car parking spaces required by the customer:", value = 0)
 reserved_room_type = st.selectbox("Insert the room type:", ['C', 'A', 'D', 'E', 'G', 'F', 'I', 'B', 'H', 'L'])
-stays_in_week_nights = st.number_input("Number of week nights (Monday to Friday) the guest stayed or booked to stay at the hotel:")
-stays_in_weekend_nights = st.number_input("	Number of weekend nights (Saturday or Sunday) the guest stayed or booked to stay at the hotel:")
-total_of_special_requests = st.number_input("Number of special requests made by the customer (e.g. twin bed or high floor):")
+stays_in_week_nights = st.number_input("Number of week nights (Monday to Friday) the guest stayed or booked to stay at the hotel:", value = 0)
+stays_in_weekend_nights = st.number_input("	Number of weekend nights (Saturday or Sunday) the guest stayed or booked to stay at the hotel:", value = 0)
+total_of_special_requests = st.number_input("Number of special requests made by the customer (e.g. twin bed or high floor):", value = 0)
 family = adults + babies + children
 
 
@@ -94,7 +94,7 @@ col = {'number_of_cancellation' : number_of_cancellation,
 df = pd.DataFrame(col, index = [0])
 
 if st.button('Predict'):
-
+    
     #Features Engineering
     df = pd.get_dummies(df)
     missing_cols = set(dummies.columns) - set(df.columns)
@@ -109,6 +109,8 @@ if st.button('Predict'):
     df2.columns = df.columns.values
     df2.index = df.index.values
     df = df2
+
+
 
     pred = model.predict(df)
     probs = model.predict_proba(df) 
